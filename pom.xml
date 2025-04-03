@@ -12,24 +12,35 @@
     <description>Java常用工具集合，包含文件存储、短信、支付等功能</description>
 
     <properties>
-        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
         <spring-boot.version>2.7.0</spring-boot.version>
         <lombok.version>1.18.24</lombok.version>
         <aliyun-oss.version>3.15.1</aliyun-oss.version>
-        <cos-api.version>5.6.89</cos-api.version>
+        <qiniu.version>7.11.0</qiniu.version>
         <minio.version>8.4.5</minio.version>
-        <alipay-sdk.version>4.34.0.ALL</alipay-sdk.version>
-        <wechatpay-sdk.version>0.4.8</wechatpay-sdk.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <javax.mail.version>1.4.7</javax.mail.version>
+        <guava.version>31.1-jre</guava.version>
+        <fastjson.version>2.0.10</fastjson.version>
+        <jackson.version>2.13.3</jackson.version>
+        <log4j2.version>2.17.1</log4j2.version>
+        <okhttp.version>4.10.0</okhttp.version>
+        <hutool.version>5.8.5</hutool.version>
+        <zxing.version>3.5.1</zxing.version>
+        <wechatpay-apache.version>0.4.8</wechatpay-apache.version>
         <aliyun-sms.version>2.0.23</aliyun-sms.version>
         <tencent-sms.version>3.1.635</tencent-sms.version>
-        <gson.version>2.9.0</gson.version>
-        <httpclient.version>4.5.13</httpclient.version>
-        <commons-io.version>2.11.0</commons-io.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <cos-api.version>5.6.89</cos-api.version>
+        <alipay-sdk.version>4.34.0.ALL</alipay-sdk.version>
+        <wechatpay-sdk.version>0.4.8</wechatpay-sdk.version>
         <poi.version>5.2.3</poi.version>
         <itext.version>5.5.13.3</itext.version>
-        <zxing.version>3.5.1</zxing.version>
+        <gson.version>2.9.0</gson.version>
+        <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
     <dependencies>
@@ -52,7 +63,7 @@
             <version>${spring-boot.version}</version>
             <optional>true</optional>
         </dependency>
-        
+
         <!-- 文件存储相关依赖 -->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
@@ -72,7 +83,7 @@
             <version>${minio.version}</version>
             <optional>true</optional>
         </dependency>
-        
+
         <!-- 短信相关依赖 -->
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -86,7 +97,7 @@
             <version>${tencent-sms.version}</version>
             <optional>true</optional>
         </dependency>
-        
+
         <!-- 支付相关依赖 -->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
@@ -94,13 +105,14 @@
             <version>${alipay-sdk.version}</version>
             <optional>true</optional>
         </dependency>
+        <!-- 微信支付SDK -->
         <dependency>
-            <groupId>com.github.wechatpay-apiv3</groupId>
-            <artifactId>wechatpay-apache-httpclient</artifactId>
-            <version>${wechatpay-sdk.version}</version>
+            <groupId>com.github.wxpay</groupId>
+            <artifactId>wxpay-sdk</artifactId>
+            <version>0.0.3</version>
             <optional>true</optional>
         </dependency>
-        
+
         <!-- 工具类依赖 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -128,14 +140,29 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-        
+
         <!-- PDF处理依赖 -->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>${itext.version}</version>
         </dependency>
-        
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-pdfa</artifactId>
+            <version>${itext.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-xtra</artifactId>
+            <version>${itext.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf.tool</groupId>
+            <artifactId>xmlworker</artifactId>
+            <version>${itext.version}</version>
+        </dependency>
+
         <!-- Excel和Word处理依赖 -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -152,7 +179,7 @@
             <artifactId>xmlbeans</artifactId>
             <version>5.1.1</version> <!-- 与POI版本相匹配 -->
         </dependency>
-        
+
         <!-- 二维码处理依赖 -->
         <dependency>
             <groupId>com.google.zxing</groupId>
@@ -164,7 +191,7 @@
             <artifactId>javase</artifactId>
             <version>${zxing.version}</version>
         </dependency>
-        
+
         <!-- Bean处理依赖 -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -172,7 +199,22 @@
             <version>5.3.20</version> <!-- 与Spring Boot 2.7.0对应的版本 -->
             <optional>true</optional>
         </dependency>
+
+        <!-- Spring Web依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.20</version> <!-- 与Spring Boot 2.7.0对应的版本 -->
+            <optional>true</optional>
+        </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/dudl0428/codeutils-spring-boot-starter</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <plugins>
@@ -221,8 +263,8 @@
         </plugins>
     </build>
 
-    <!-- 支持JitPack发布 -->
     <repositories>
+        <!-- JitPack仓库，用于获取WxJava依赖 -->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>

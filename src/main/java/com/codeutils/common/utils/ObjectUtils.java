@@ -23,23 +23,23 @@ public class ObjectUtils {
         if (obj == null) {
             return true;
         }
-        
+
         if (obj instanceof String) {
             return ((String) obj).isEmpty();
         }
-        
+
         if (obj instanceof Collection) {
             return ((Collection<?>) obj).isEmpty();
         }
-        
+
         if (obj instanceof Map) {
             return ((Map<?, ?>) obj).isEmpty();
         }
-        
+
         if (obj.getClass().isArray()) {
             return java.lang.reflect.Array.getLength(obj) == 0;
         }
-        
+
         return false;
     }
 
@@ -67,11 +67,11 @@ public class ObjectUtils {
         if (obj == null) {
             return null;
         }
-        
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(obj);
-        
+
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         return (T) ois.readObject();
@@ -88,11 +88,11 @@ public class ObjectUtils {
         if (obj1 == obj2) {
             return true;
         }
-        
+
         if (obj1 == null || obj2 == null) {
             return false;
         }
-        
+
         return obj1.equals(obj2);
     }
 
@@ -160,7 +160,7 @@ public class ObjectUtils {
         if (obj == null || StringUtils.isEmpty(fieldName)) {
             return null;
         }
-        
+
         try {
             Field field = obj.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -181,7 +181,7 @@ public class ObjectUtils {
         if (obj == null || StringUtils.isEmpty(fieldName)) {
             return;
         }
-        
+
         try {
             Field field = obj.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -203,13 +203,13 @@ public class ObjectUtils {
         if (obj == null || StringUtils.isEmpty(methodName)) {
             return null;
         }
-        
+
         try {
             Class<?>[] parameterTypes = new Class[args.length];
             for (int i = 0; i < args.length; i++) {
                 parameterTypes[i] = args[i] != null ? args[i].getClass() : Object.class;
             }
-            
+
             Method method = obj.getClass().getMethod(methodName, parameterTypes);
             method.setAccessible(true);
             return method.invoke(obj, args);
@@ -326,20 +326,24 @@ public class ObjectUtils {
         }
 
         /**
-         * 对象比较
+         * 判断对象是否相等
          *
-         * @param obj 对象
+         * @param obj 比较对象
          * @return 是否相等
          */
+        @Override
         public boolean equals(Object obj) {
-            if (obj == this) {
+            if (this == obj) {
                 return true;
             }
-            if (!(obj instanceof ObjectStream)) {
+            if (obj == null || getClass() != obj.getClass()) {
                 return false;
             }
-            ObjectStream<?> other = (ObjectStream<?>) obj;
-            return equals(value, other.value);
+            // 由于泛型擦除，需要安全转换
+            @SuppressWarnings("rawtypes")
+            ObjectStream other = (ObjectStream) obj;
+            // 使用工具类的equals方法比较值
+            return ObjectUtils.equals(value, other.value);
         }
     }
 
@@ -364,23 +368,23 @@ public class ObjectUtils {
         if (obj == null) {
             return Collections.emptyMap();
         }
-        
+
         // 如果本身已经是Map类型，直接返回
         if (obj instanceof Map) {
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) obj;
             return map;
         }
-        
+
         try {
             Map<String, Object> result = new HashMap<>();
             Field[] fields = obj.getClass().getDeclaredFields();
-            
+
             for (Field field : fields) {
                 field.setAccessible(true);
                 result.put(field.getName(), field.get(obj));
             }
-            
+
             return result;
         } catch (Exception e) {
             throw new RuntimeException("对象转Map失败", e);
@@ -400,12 +404,12 @@ public class ObjectUtils {
         if (obj == null) {
             return null;
         }
-        
+
         // 如果对象已经是目标类型，直接返回
         if (targetClass.isInstance(obj)) {
             return (T) obj;
         }
-        
+
         // 基本类型转换
         if (targetClass == String.class) {
             return (T) obj.toString();
@@ -427,7 +431,7 @@ public class ObjectUtils {
             String str = obj.toString();
             return (T) Character.valueOf(str.isEmpty() ? ' ' : str.charAt(0));
         }
-        
+
         // 复杂类型转换
         try {
             // 使用BeanUtils进行转换
@@ -448,12 +452,12 @@ public class ObjectUtils {
         if (obj == null) {
             return null;
         }
-        
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(obj);
         oos.close();
-        
+
         return baos.toByteArray();
     }
 
@@ -471,7 +475,7 @@ public class ObjectUtils {
         if (bytes == null || bytes.length == 0) {
             return null;
         }
-        
+
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
         ObjectInputStream ois = new ObjectInputStream(bais);
         return (T) ois.readObject();
@@ -487,10 +491,10 @@ public class ObjectUtils {
         if (obj == null) {
             return Collections.emptyMap();
         }
-        
+
         Map<String, Object> result = new LinkedHashMap<>();
         List<Field> fields = BeanUtils.getAllFields(obj.getClass());
-        
+
         for (Field field : fields) {
             field.setAccessible(true);
             try {
@@ -499,7 +503,7 @@ public class ObjectUtils {
                 // 忽略不可访问字段
             }
         }
-        
+
         return result;
     }
 
@@ -513,22 +517,22 @@ public class ObjectUtils {
         if (obj == null) {
             return "null";
         }
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append(obj.getClass().getName()).append(" [");
-        
+
         Map<String, Object> fieldsAndValues = getFieldsAndValues(obj);
         boolean first = true;
-        
+
         for (Map.Entry<String, Object> entry : fieldsAndValues.entrySet()) {
             if (!first) {
                 sb.append(", ");
             }
             first = false;
-            
+
             sb.append(entry.getKey()).append("=");
             Object value = entry.getValue();
-            
+
             if (value == null) {
                 sb.append("null");
             } else if (value.getClass().isArray()) {
@@ -537,7 +541,7 @@ public class ObjectUtils {
                 sb.append(value);
             }
         }
-        
+
         sb.append("]");
         return sb.toString();
     }
@@ -552,20 +556,20 @@ public class ObjectUtils {
         if (array == null) {
             return "null";
         }
-        
+
         int length = java.lang.reflect.Array.getLength(array);
         if (length == 0) {
             return "[]";
         }
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        
+
         for (int i = 0; i < length; i++) {
             if (i > 0) {
                 sb.append(", ");
             }
-            
+
             Object item = java.lang.reflect.Array.get(array, i);
             if (item == null) {
                 sb.append("null");
@@ -575,7 +579,7 @@ public class ObjectUtils {
                 sb.append(item);
             }
         }
-        
+
         sb.append("]");
         return sb.toString();
     }
@@ -591,7 +595,7 @@ public class ObjectUtils {
         if (obj == null || StringUtils.isEmpty(fieldName)) {
             return false;
         }
-        
+
         try {
             obj.getClass().getDeclaredField(fieldName);
             return true;
@@ -612,7 +616,7 @@ public class ObjectUtils {
         if (obj == null || StringUtils.isEmpty(methodName)) {
             return false;
         }
-        
+
         try {
             obj.getClass().getMethod(methodName, parameterTypes);
             return true;

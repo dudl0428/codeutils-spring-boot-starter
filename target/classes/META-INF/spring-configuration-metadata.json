@@ -1,0 +1,348 @@
+{
+  "groups": [
+    {
+      "name": "codeutils",
+      "type": "com.codeutils.core.config.CodeUtilsProperties",
+      "sourceType": "com.codeutils.core.config.CodeUtilsProperties"
+    },
+    {
+      "name": "codeutils.pay",
+      "type": "com.codeutils.pay.config.PayProperties",
+      "sourceType": "com.codeutils.core.config.CodeUtilsProperties"
+    },
+    {
+      "name": "codeutils.pay.alipay",
+      "type": "com.codeutils.pay.config.PayProperties$AlipayProperties",
+      "sourceType": "com.codeutils.pay.config.PayProperties"
+    },
+    {
+      "name": "codeutils.pay.unionpay",
+      "type": "com.codeutils.pay.config.PayProperties$UnionPayProperties",
+      "sourceType": "com.codeutils.pay.config.PayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat",
+      "type": "com.codeutils.pay.config.PayProperties$WechatPayProperties",
+      "sourceType": "com.codeutils.pay.config.PayProperties"
+    },
+    {
+      "name": "codeutils.sms",
+      "type": "com.codeutils.sms.config.SmsProperties",
+      "sourceType": "com.codeutils.core.config.CodeUtilsProperties"
+    },
+    {
+      "name": "codeutils.sms.aliyun",
+      "type": "com.codeutils.sms.config.SmsProperties$AliyunSmsProperties",
+      "sourceType": "com.codeutils.sms.config.SmsProperties"
+    },
+    {
+      "name": "codeutils.sms.tencent",
+      "type": "com.codeutils.sms.config.SmsProperties$TencentSmsProperties",
+      "sourceType": "com.codeutils.sms.config.SmsProperties"
+    },
+    {
+      "name": "codeutils.storage",
+      "type": "com.codeutils.storage.config.StorageProperties",
+      "sourceType": "com.codeutils.core.config.CodeUtilsProperties"
+    },
+    {
+      "name": "codeutils.storage.cos",
+      "type": "com.codeutils.storage.config.StorageProperties$CosProperties",
+      "sourceType": "com.codeutils.storage.config.StorageProperties"
+    },
+    {
+      "name": "codeutils.storage.minio",
+      "type": "com.codeutils.storage.config.StorageProperties$MinioProperties",
+      "sourceType": "com.codeutils.storage.config.StorageProperties"
+    },
+    {
+      "name": "codeutils.storage.oss",
+      "type": "com.codeutils.storage.config.StorageProperties$OssProperties",
+      "sourceType": "com.codeutils.storage.config.StorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "codeutils.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用CodeUtils",
+      "sourceType": "com.codeutils.core.config.CodeUtilsProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "codeutils.pay.alipay.alipay-public-key",
+      "type": "java.lang.String",
+      "description": "支付宝公钥",
+      "sourceType": "com.codeutils.pay.config.PayProperties$AlipayProperties"
+    },
+    {
+      "name": "codeutils.pay.alipay.app-id",
+      "type": "java.lang.String",
+      "description": "应用ID",
+      "sourceType": "com.codeutils.pay.config.PayProperties$AlipayProperties"
+    },
+    {
+      "name": "codeutils.pay.alipay.gateway-url",
+      "type": "java.lang.String",
+      "description": "网关地址",
+      "sourceType": "com.codeutils.pay.config.PayProperties$AlipayProperties",
+      "defaultValue": "https:\/\/openapi.alipay.com\/gateway.do"
+    },
+    {
+      "name": "codeutils.pay.alipay.notify-url",
+      "type": "java.lang.String",
+      "description": "回调地址",
+      "sourceType": "com.codeutils.pay.config.PayProperties$AlipayProperties"
+    },
+    {
+      "name": "codeutils.pay.alipay.private-key",
+      "type": "java.lang.String",
+      "description": "私钥",
+      "sourceType": "com.codeutils.pay.config.PayProperties$AlipayProperties"
+    },
+    {
+      "name": "codeutils.pay.alipay.public-key",
+      "type": "java.lang.String",
+      "description": "公钥",
+      "sourceType": "com.codeutils.pay.config.PayProperties$AlipayProperties"
+    },
+    {
+      "name": "codeutils.pay.alipay.return-url",
+      "type": "java.lang.String",
+      "description": "返回地址",
+      "sourceType": "com.codeutils.pay.config.PayProperties$AlipayProperties"
+    },
+    {
+      "name": "codeutils.pay.type",
+      "type": "java.lang.String",
+      "description": "支付类型：wechat(微信)、alipay(支付宝)、unionpay(银联)",
+      "sourceType": "com.codeutils.pay.config.PayProperties",
+      "defaultValue": "wechat"
+    },
+    {
+      "name": "codeutils.pay.unionpay.back-url",
+      "type": "java.lang.String",
+      "description": "后台通知地址",
+      "sourceType": "com.codeutils.pay.config.PayProperties$UnionPayProperties"
+    },
+    {
+      "name": "codeutils.pay.unionpay.cert-path",
+      "type": "java.lang.String",
+      "description": "证书路径",
+      "sourceType": "com.codeutils.pay.config.PayProperties$UnionPayProperties"
+    },
+    {
+      "name": "codeutils.pay.unionpay.cert-pwd",
+      "type": "java.lang.String",
+      "description": "证书密码",
+      "sourceType": "com.codeutils.pay.config.PayProperties$UnionPayProperties"
+    },
+    {
+      "name": "codeutils.pay.unionpay.front-url",
+      "type": "java.lang.String",
+      "description": "前台通知地址",
+      "sourceType": "com.codeutils.pay.config.PayProperties$UnionPayProperties"
+    },
+    {
+      "name": "codeutils.pay.unionpay.mch-id",
+      "type": "java.lang.String",
+      "description": "商户号",
+      "sourceType": "com.codeutils.pay.config.PayProperties$UnionPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.api-v3-key",
+      "type": "java.lang.String",
+      "description": "API V3密钥",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.app-id",
+      "type": "java.lang.String",
+      "description": "应用ID",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.cert-serial-no",
+      "type": "java.lang.String",
+      "description": "证书序列号",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.key-path",
+      "type": "java.lang.String",
+      "description": "证书路径",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.mch-id",
+      "type": "java.lang.String",
+      "description": "商户号",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.mch-key",
+      "type": "java.lang.String",
+      "description": "商户密钥",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.notify-url",
+      "type": "java.lang.String",
+      "description": "回调地址",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.private-cert-path",
+      "type": "java.lang.String",
+      "description": "私钥证书路径",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.pay.wechat.private-key-path",
+      "type": "java.lang.String",
+      "description": "私钥路径",
+      "sourceType": "com.codeutils.pay.config.PayProperties$WechatPayProperties"
+    },
+    {
+      "name": "codeutils.sms.aliyun.access-key",
+      "type": "java.lang.String",
+      "description": "访问密钥",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$AliyunSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.aliyun.secret-key",
+      "type": "java.lang.String",
+      "description": "密钥",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$AliyunSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.aliyun.sign-name",
+      "type": "java.lang.String",
+      "description": "签名名称",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$AliyunSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.aliyun.template-code",
+      "type": "java.lang.String",
+      "description": "模板代码",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$AliyunSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.tencent.app-id",
+      "type": "java.lang.String",
+      "description": "应用ID",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$TencentSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.tencent.secret-id",
+      "type": "java.lang.String",
+      "description": "密钥ID",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$TencentSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.tencent.secret-key",
+      "type": "java.lang.String",
+      "description": "密钥",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$TencentSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.tencent.sign-name",
+      "type": "java.lang.String",
+      "description": "签名名称",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$TencentSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.tencent.template-id",
+      "type": "java.lang.String",
+      "description": "模板ID",
+      "sourceType": "com.codeutils.sms.config.SmsProperties$TencentSmsProperties"
+    },
+    {
+      "name": "codeutils.sms.type",
+      "type": "java.lang.String",
+      "description": "短信类型：aliyun(阿里云)、tencent(腾讯云)",
+      "sourceType": "com.codeutils.sms.config.SmsProperties",
+      "defaultValue": "aliyun"
+    },
+    {
+      "name": "codeutils.storage.cos.bucket-name",
+      "type": "java.lang.String",
+      "description": "存储桶名称",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$CosProperties"
+    },
+    {
+      "name": "codeutils.storage.cos.region",
+      "type": "java.lang.String",
+      "description": "地域",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$CosProperties"
+    },
+    {
+      "name": "codeutils.storage.cos.secret-id",
+      "type": "java.lang.String",
+      "description": "密钥ID",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$CosProperties"
+    },
+    {
+      "name": "codeutils.storage.cos.secret-key",
+      "type": "java.lang.String",
+      "description": "密钥",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$CosProperties"
+    },
+    {
+      "name": "codeutils.storage.minio.access-key",
+      "type": "java.lang.String",
+      "description": "访问密钥",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$MinioProperties"
+    },
+    {
+      "name": "codeutils.storage.minio.bucket-name",
+      "type": "java.lang.String",
+      "description": "存储桶名称",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$MinioProperties"
+    },
+    {
+      "name": "codeutils.storage.minio.endpoint",
+      "type": "java.lang.String",
+      "description": "节点地址",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$MinioProperties"
+    },
+    {
+      "name": "codeutils.storage.minio.secret-key",
+      "type": "java.lang.String",
+      "description": "密钥",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$MinioProperties"
+    },
+    {
+      "name": "codeutils.storage.oss.access-key",
+      "type": "java.lang.String",
+      "description": "访问密钥",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$OssProperties"
+    },
+    {
+      "name": "codeutils.storage.oss.bucket-name",
+      "type": "java.lang.String",
+      "description": "存储桶名称",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$OssProperties"
+    },
+    {
+      "name": "codeutils.storage.oss.endpoint",
+      "type": "java.lang.String",
+      "description": "节点地址",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$OssProperties"
+    },
+    {
+      "name": "codeutils.storage.oss.secret-key",
+      "type": "java.lang.String",
+      "description": "密钥",
+      "sourceType": "com.codeutils.storage.config.StorageProperties$OssProperties"
+    },
+    {
+      "name": "codeutils.storage.type",
+      "type": "java.lang.String",
+      "description": "存储类型：oss(阿里云)、cos(腾讯云)、minio",
+      "sourceType": "com.codeutils.storage.config.StorageProperties",
+      "defaultValue": "oss"
+    }
+  ],
+  "hints": []
+}
